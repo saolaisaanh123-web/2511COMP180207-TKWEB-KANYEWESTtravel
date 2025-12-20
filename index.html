@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KANYE WEST Travel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {font-family: 'Poppins', sans-serif; background: #f6f8fa; color: #333;}
+    .navbar {background: #0077b6;}
+    .navbar-brand, .nav-link {color: #fff !important; font-weight: 600;}
+    .nav-link:hover {color: #ffe45e !important;}
+    .hero {background: url('vietnam.jpg') center/cover no-repeat; height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; position: relative;}
+    .hero::after {content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55);}
+    .hero h1, .hero p, .hero a {position: relative; z-index: 2;}
+    .btn-gold {background-color: #ffe45e; color: #000; border-radius: 30px; padding: 12px 30px; font-weight: 600; transition: 0.3s;}
+    .btn-gold:hover {background-color: #ffcd00; transform: scale(1.05);}
+    .tour-card {background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s;}
+    .tour-card:hover {transform: translateY(-8px);}
+    .tour-card img {width: 100%; height: 220px; object-fit: cover;}
+    .tour-card .card-body {padding: 20px;}
+    .tour-card h5 {font-weight: 700; color: #0077b6;}
+    .price {color: #0077b6; font-weight: 700; font-size: 1.1rem;}
+    footer {background: #023e8a; color: #fff; text-align: center; padding: 25px; margin-top: 60px;}
+    .modal-content {border-radius: 15px; overflow: hidden;}
+    .modal-header {background: #0077b6; color: #fff; border-bottom: none;}
+    .modal-body img {border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-plane-departure me-2"></i>KANYE WEST Travel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tours">Tour</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section id="home" class="hero">
+  <h1>Khám Phá Việt Nam Tuyệt Đẹp</h1>
+  <p>Trải nghiệm hành trình đáng nhớ cùng KANYE WEST Travel</p>
+  <a href="#tours" class="btn btn-gold">Khám phá ngay</a>
+</section>
+
+
+<section id="tours" class="container py-5">
+  <h2 class="text-center text-primary mb-5 fw-bold">Tour Nổi Bật</h2>
+  <div class="row g-4">
+    <div class="col-md-4" onclick="openDetail(1)"><div class="tour-card"><img src="hobabe.jpg"><div class="card-body"><h5>Hồ Ba Bể 2N1Đ</h5><p>Khám phá hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi rừng Bắc Kạn.</p><div class="price">2.900.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(2)"><div class="tour-card"><img src="phongnhakebang.jpg"><div class="card-body"><h5>Phong Nha - Kẻ Bàng 2N1Đ</h5><p>Tham quan hang động kỳ vĩ, sông Son và thiên nhiên hoang sơ Quảng Bình.</p><div class="price">3.300.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(3)"><div class="tour-card"><img src="phocohoian.jpg"><div class="card-body"><h5>Phố cổ Hội An 3N2Đ</h5><p>Đi dạo bên sông Hoài, ngắm đèn lồng và thưởng thức ẩm thực phố cổ.</p><div class="price">3.700.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(4)"><div class="tour-card"><img src="hagiang.jpg"><div class="card-body"><h5>Hà Giang 5N4Đ</h5><p>Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng và cảnh sắc miền núi hùng vĩ.</p><div class="price">6.800.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(5)"><div class="tour-card"><img src="hue.jpg"><div class="card-body"><h5>Huế 2N1Đ</h5><p>Khám phá cố đô, chùa Thiên Mụ, Đại Nội và du thuyền sông Hương.</p><div class="price">2.800.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(6)"><div class="tour-card"><img src="tphochiminh.jpg"><div class="card-body"><h5>TP Hồ Chí Minh 2N1Đ</h5><p>Khám phá Sài Gòn hoa lệ, Dinh Độc Lập, chợ Bến Thành và phố đi bộ Nguyễn Huệ.</p><div class="price">2.600.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(7)"><div class="tour-card"><img src="vinhhalong.jpg"><div class="card-body"><h5>Vịnh Hạ Long 2N1Đ</h5><p>Du thuyền trên vịnh – kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi.</p><div class="price">3.500.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(8)"><div class="tour-card"><img src="hanoi.jpg"><div class="card-body"><h5>Hà Nội 2N1Đ</h5><p>Thủ đô nghìn năm văn hiến, tham quan Lăng Bác, Hồ Gươm và phố cổ Hà Nội.</p><div class="price">2.800.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(9)"><div class="tour-card"><img src="dalat.jpg"><div class="card-body"><h5>Đà Lạt 3N2Đ</h5><p>Thành phố ngàn hoa, không khí se lạnh và khung cảnh lãng mạn.</p><div class="price">3.500.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(10)"><div class="tour-card"><img src="phuquoc.jpg"><div class="card-body"><h5>Phú Quốc 4N3Đ</h5><p>Thiên đường biển đảo – nơi nghỉ dưỡng sang trọng bậc nhất Việt Nam.</p><div class="price">5.200.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(11)"><div class="tour-card"><img src="nhatrang.jpg"><div class="card-body"><h5>Nha Trang 3N2Đ</h5><p>Thành phố biển sôi động, bãi biển trong xanh và ẩm thực phong phú.</p><div class="price">4.100.000 ₫</div></div></div></div>
+    <div class="col-md-4" onclick="openDetail(12)"><div class="tour-card"><img src="sapa.jpg"><div class="card-body"><h5>Sapa 3N2Đ</h5><p>Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.</p><div class="price">3.900.000 ₫</div></div></div></div>
+  </div>
+</section>
+
+<footer>
+  <p class="mb-1">© 2036 KANYE WEST Travel. All rights reserved.</p>
+  <small><i class="fa-solid fa-location-dot me-1"></i> Thanh Hóa, Việt Nam</small>
+</footer>
+
+
+<div class="modal fade" id="tourModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="modalTitle" class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImg" src="" class="img-fluid" alt="">
+        <p id="modalDesc"></p>
+        <h5 class="text-success" id="modalPrice"></h5>
+        <h6 class="fw-bold mt-3">Dịch vụ bao gồm:</h6>
+        <ul id="modalServices"></ul>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-gold"><i class="fa-solid fa-plane me-2"></i>Đặt tour ngay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const tours = {
+  1:{name:"Hồ Ba Bể 2N1Đ",price:"2.900.000 ₫",desc:"Khám phá hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi rừng Bắc Kạn.",img:"hobabe.jpg",services:["Thuyền tham quan","Khách sạn 3 sao","Ăn 3 bữa/ngày","Vé tham quan"]},
+  2:{name:"Phong Nha - Kẻ Bàng 2N1Đ",price:"3.300.000 ₫",desc:"Tham quan hang động kỳ vĩ, sông Son và thiên nhiên hoang sơ Quảng Bình.",img:"phongnhakebang.jpg",services:["Khách sạn 3 sao","Thuyền Phong Nha","Hướng dẫn viên","Ăn sáng buffet"]},
+  3:{name:"Phố cổ Hội An 3N2Đ",price:"3.700.000 ₫",desc:"Dạo phố cổ, ngắm đèn lồng, thưởng thức ẩm thực và check-in cầu Nhật Bản.",img:"phocohoian.jpg",services:["Khách sạn phố cổ","Ăn sáng","Xe đưa đón","Vé tham quan"]},
+  4:{name:"Hà Giang 5N4Đ",price:"6.800.000 ₫",desc:"Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng và cảnh sắc hùng vĩ.",img:"hagiang.jpg",services:["Khách sạn 2-3 sao","Xe du lịch","Ăn 3 bữa/ngày","Vé tham quan"]},
+  5:{name:"Huế 2N1Đ",price:"2.800.000 ₫",desc:"Khám phá Đại Nội, chùa Thiên Mụ và du thuyền sông Hương.",img:"hue.jpg",services:["Khách sạn trung tâm","Ăn sáng","Hướng dẫn viên","Vé tham quan"]},
+  6:{name:"TP Hồ Chí Minh 2N1Đ",price:"2.600.000 ₫",desc:"Khám phá Sài Gòn hoa lệ, Dinh Độc Lập, chợ Bến Thành và phố đi bộ Nguyễn Huệ.",img:"tphochiminh.jpg",services:["Khách sạn 3 sao","Ăn sáng","Xe tham quan","Vé tham quan"]},
+  7:{name:"Vịnh Hạ Long 2N1Đ",price:"3.500.000 ₫",desc:"Du thuyền trên vịnh – kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi.",img:"vinhhalong.jpg",services:["Du thuyền 4 sao","Ăn trên tàu","Vé tham quan","Xe đưa đón"]},
+  8:{name:"Hà Nội 2N1Đ",price:"2.800.000 ₫",desc:"Thủ đô nghìn năm văn hiến, tham quan Lăng Bác, Hồ Gươm và phố cổ Hà Nội.",img:"hanoi.jpg",services:["Khách sạn trung tâm","Ăn sáng buffet","Xe đưa đón","Vé tham quan"]},
+  9:{name:"Đà Lạt 3N2Đ",price:"3.500.000 ₫",desc:"Thành phố ngàn hoa, không khí se lạnh và cảnh đẹp lãng mạn.",img:"dalat.jpg",services:["Khách sạn 3 sao","Ăn sáng","Xe đưa đón","Vé tham quan"]},
+  10:{name:"Phú Quốc 4N3Đ",price:"5.200.000 ₫",desc:"Thiên đường biển đảo – nghỉ dưỡng sang trọng, bãi cát trắng mịn.",img:"phuquoc.jpg",services:["Khách sạn 4 sao","Ăn 3 bữa/ngày","Vé cáp treo Hòn Thơm","Xe đón sân bay"]},
+  11:{name:"Nha Trang 3N2Đ",price:"4.100.000 ₫",desc:"Thành phố biển năng động, bãi biển trong xanh và ẩm thực phong phú.",img:"nhatrang.jpg",services:["Khách sạn ven biển","Bữa ăn hải sản","Xe đưa đón","Vé VinWonders"]},
+  12:{name:"Sapa 3N2Đ",price:"3.900.000 ₫",desc:"Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.",img:"sapa.jpg",services:["Khách sạn 3 sao","Ăn sáng + tối","Cáp treo Fansipan","Xe giường nằm"]}
+};
+
+function openDetail(id){
+  const t = tours[id];
+  document.getElementById('modalTitle').innerText = t.name;
+  document.getElementById('modalImg').src = t.img;
+  document.getElementById('modalDesc').innerText = t.desc;
+  document.getElementById('modalPrice').innerText = "Giá: " + t.price;
+  document.getElementById('modalServices').innerHTML = t.services.map(s => `<li>${s}</li>`).join('');
+  new bootstrap.Modal(document.getElementById('tourModal')).show();
+}
+</script>
+</body>
+</html>
