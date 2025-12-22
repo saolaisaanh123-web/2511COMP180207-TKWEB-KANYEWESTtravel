@@ -16,7 +16,7 @@
     .hero h1, .hero p, .hero a {position: relative; z-index: 2;}
     .btn-gold {background-color: #ffe45e; color: #000; border-radius: 30px; padding: 12px 30px; font-weight: 600; transition: 0.3s;}
     .btn-gold:hover {background-color: #ffcd00; transform: scale(1.05);}
-    .tour-card {background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s;}
+    .tour-card {background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; cursor:pointer;}
     .tour-card:hover {transform: translateY(-8px);}
     .tour-card img {width: 100%; height: 220px; object-fit: cover;}
     .tour-card .card-body {padding: 20px;}
@@ -26,6 +26,7 @@
     .modal-content {border-radius: 15px; overflow: hidden;}
     .modal-header {background: #0077b6; color: #fff; border-bottom: none;}
     .modal-body img {border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
+    .form-label {font-weight: 600;}
   </style>
 </head>
 <body>
@@ -56,21 +57,11 @@
 
 <section id="tours" class="container py-5">
   <h2 class="text-center text-primary mb-5 fw-bold">Tour Nổi Bật</h2>
-  <div class="row g-4">
-    <div class="col-md-4" onclick="openDetail(1)"><div class="tour-card"><img src="hobabe.jpg"><div class="card-body"><h5>Hồ Ba Bể 2N1Đ</h5><p>Khám phá hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi rừng Bắc Kạn.</p><div class="price">2.900.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(2)"><div class="tour-card"><img src="phongnhakebang.jpg"><div class="card-body"><h5>Phong Nha - Kẻ Bàng 2N1Đ</h5><p>Tham quan hang động kỳ vĩ, sông Son và thiên nhiên hoang sơ Quảng Bình.</p><div class="price">3.300.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(3)"><div class="tour-card"><img src="phocohoian.jpg"><div class="card-body"><h5>Phố cổ Hội An 3N2Đ</h5><p>Đi dạo bên sông Hoài, ngắm đèn lồng và thưởng thức ẩm thực phố cổ.</p><div class="price">3.700.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(4)"><div class="tour-card"><img src="hagiang.jpg"><div class="card-body"><h5>Hà Giang 5N4Đ</h5><p>Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng và cảnh sắc miền núi hùng vĩ.</p><div class="price">6.800.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(5)"><div class="tour-card"><img src="hue.jpg"><div class="card-body"><h5>Huế 2N1Đ</h5><p>Khám phá cố đô, chùa Thiên Mụ, Đại Nội và du thuyền sông Hương.</p><div class="price">2.800.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(6)"><div class="tour-card"><img src="tphochiminh.jpg"><div class="card-body"><h5>TP Hồ Chí Minh 2N1Đ</h5><p>Khám phá Sài Gòn hoa lệ, Dinh Độc Lập, chợ Bến Thành và phố đi bộ Nguyễn Huệ.</p><div class="price">2.600.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(7)"><div class="tour-card"><img src="vinhhalong.jpg"><div class="card-body"><h5>Vịnh Hạ Long 2N1Đ</h5><p>Du thuyền trên vịnh – kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi.</p><div class="price">3.500.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(8)"><div class="tour-card"><img src="hanoi.jpg"><div class="card-body"><h5>Hà Nội 2N1Đ</h5><p>Thủ đô nghìn năm văn hiến, tham quan Lăng Bác, Hồ Gươm và phố cổ Hà Nội.</p><div class="price">2.800.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(9)"><div class="tour-card"><img src="dalat.jpg"><div class="card-body"><h5>Đà Lạt 3N2Đ</h5><p>Thành phố ngàn hoa, không khí se lạnh và khung cảnh lãng mạn.</p><div class="price">3.500.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(10)"><div class="tour-card"><img src="phuquoc.jpg"><div class="card-body"><h5>Phú Quốc 4N3Đ</h5><p>Thiên đường biển đảo – nơi nghỉ dưỡng sang trọng bậc nhất Việt Nam.</p><div class="price">5.200.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(11)"><div class="tour-card"><img src="nhatrang.jpg"><div class="card-body"><h5>Nha Trang 3N2Đ</h5><p>Thành phố biển sôi động, bãi biển trong xanh và ẩm thực phong phú.</p><div class="price">4.100.000 ₫</div></div></div></div>
-    <div class="col-md-4" onclick="openDetail(12)"><div class="tour-card"><img src="sapa.jpg"><div class="card-body"><h5>Sapa 3N2Đ</h5><p>Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.</p><div class="price">3.900.000 ₫</div></div></div></div>
+  <div class="row g-4" id="tour-list">
+    
   </div>
 </section>
+
 
 <footer>
   <p class="mb-1">© 2036 KANYE WEST Travel. All rights reserved.</p>
@@ -91,13 +82,28 @@
         <h5 class="text-success" id="modalPrice"></h5>
         <h6 class="fw-bold mt-3">Dịch vụ bao gồm:</h6>
         <ul id="modalServices"></ul>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-gold"><i class="fa-solid fa-plane me-2"></i>Đặt tour ngay</button>
+        <hr>
+        <h5 class="text-primary">Đặt tour ngay</h5>
+        <form id="bookingForm">
+          <div class="mb-3">
+            <label class="form-label">Họ tên</label>
+            <input type="text" class="form-control" id="customerName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Số điện thoại</label>
+            <input type="tel" class="form-control" id="customerPhone" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="customerEmail" required>
+          </div>
+          <button type="submit" class="btn btn-gold w-100"><i class="fa-solid fa-plane me-2"></i>Gửi yêu cầu đặt tour</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -116,15 +122,45 @@ const tours = {
   12:{name:"Sapa 3N2Đ",price:"3.900.000 ₫",desc:"Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.",img:"sapa.jpg",services:["Khách sạn 3 sao","Ăn sáng + tối","Cáp treo Fansipan","Xe giường nằm"]}
 };
 
+
+const tourList = document.getElementById('tour-list');
+for (let id in tours) {
+  const t = tours[id];
+  tourList.innerHTML += `
+    <div class="col-md-4 col-sm-6" onclick="openDetail(${id})">
+      <div class="tour-card">
+        <img src="${t.img}" alt="${t.name}" class="img-fluid" loading="lazy">
+        <div class="card-body">
+          <h5>${t.name}</h5>
+          <p>${t.desc}</p>
+          <div class="price">${t.price}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+
 function openDetail(id){
   const t = tours[id];
   document.getElementById('modalTitle').innerText = t.name;
   document.getElementById('modalImg').src = t.img;
+  document.getElementById('modalImg').alt = t.name;
   document.getElementById('modalDesc').innerText = t.desc;
   document.getElementById('modalPrice').innerText = "Giá: " + t.price;
   document.getElementById('modalServices').innerHTML = t.services.map(s => `<li>${s}</li>`).join('');
   new bootstrap.Modal(document.getElementById('tourModal')).show();
 }
+
+
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('customerName').value;
+  const phone = document.getElementById('customerPhone').value;
+  const email = document.getElementById('customerEmail').value;
+  alert(`Cảm ơn ${name}! Chúng tôi đã nhận thông tin đặt tour.\nSố điện thoại: ${phone}\nEmail: ${email}`);
+  this.reset();
+});
 </script>
 </body>
 </html>
