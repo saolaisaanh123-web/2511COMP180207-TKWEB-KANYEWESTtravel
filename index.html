@@ -9,24 +9,44 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
-    body {font-family: 'Poppins', sans-serif; background: #f6f8fa; color: #333;}
-    .navbar {background: #0077b6;}
-    .navbar-brand, .nav-link {color: #fff !important; font-weight: 600;}
-    .nav-link:hover {color: #ffe45e !important;}
-    .hero {background: url('vietnam.jpg') center/cover no-repeat; height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; position: relative;}
-    .hero::after {content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55);}
-    .hero h1, .hero p, .hero a {position: relative; z-index: 2;}
-    .btn-gold {background-color: #ffe45e; color: #000; border-radius: 30px; padding: 12px 30px; font-weight: 600; transition: 0.3s;}
-    .btn-gold:hover {background-color: #ffcd00; transform: scale(1.05);}
-    .tour-card {background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; cursor:pointer;}
-    .tour-card:hover {transform: translateY(-8px);}
-    .tour-card img {width: 100%; height: 220px; object-fit: cover;}
-    .tour-card .card-body {padding: 20px;}
-    .tour-card h5 {font-weight: 700; color: #0077b6;}
-    .price {color: #0077b6; font-weight: 700; font-size: 1.1rem;}
-    footer {background: #023e8a; color: #fff; text-align: center; padding: 25px; margin-top: 60px;}
-    .search-box {max-width: 400px; margin: 20px auto;}
-    .form-label {font-weight: 600;}
+    :root {
+      --primary: #0077b6;
+      --secondary: #00b4d8;
+      --accent: #ffe45e;
+      --bg-light: #f6f8fa;
+      --bg-dark: #121212;
+      --text-light: #fff;
+      --text-dark: #222;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      transition: 0.4s;
+    }
+    body.dark-mode {background: var(--bg-dark);color: var(--text-light);}
+    .navbar {background: var(--primary);transition: 0.3s;}
+    .navbar-brand, .nav-link {color: white !important;font-weight: 600;}
+    .nav-link:hover {color: var(--accent) !important;}
+    .hero {
+      background: url('vietnam.jpg') center/cover no-repeat;
+      height: 90vh;display: flex;flex-direction: column;justify-content: center;align-items: center;text-align: center;
+      color: white;position: relative;overflow: hidden;animation: heroZoom 2.5s ease-in-out;
+    }
+    .hero::after {content: "";position: absolute;inset: 0;background: rgba(0, 0, 0, 0.55);}
+    .hero h1, .hero p, .hero a {position: relative;z-index: 2;}
+    @keyframes heroZoom {0% {opacity: 0;transform: scale(1.1);}100% {opacity: 1;transform: scale(1);}}
+    .btn-gold {background: var(--accent);color: #000;border-radius: 30px;padding: 12px 30px;font-weight: 600;transition: 0.3s;}
+    .btn-gold:hover {background: #ffcd00;transform: scale(1.05);}
+    .tour-card {background: white;border-radius: 15px;overflow: hidden;box-shadow: 0 4px 15px rgba(0,0,0,0.1);transition: transform 0.3s, box-shadow 0.3s;}
+    .tour-card:hover {transform: translateY(-8px);box-shadow: 0 6px 20px rgba(0,0,0,0.15);}
+    .tour-card img {height: 230px;object-fit: cover;width: 100%;}
+    .tour-card h5 {color: var(--primary);font-weight: 700;}
+    footer {background: #023e8a;color: white;padding: 25px;text-align: center;margin-top: 60px;}
+    .toggle-dark {background: transparent;border: none;color: white;font-size: 1.3rem;}
+    body.dark-mode .tour-card {background: #1e1e1e;color: white;}
+    body.dark-mode .modal-content {background: #222;color: white;}
+    .price {color: var(--secondary);font-weight: bold;}
   </style>
 </head>
 <body>
@@ -42,20 +62,21 @@
         <li class="nav-item"><a class="nav-link" href="#home">Trang chủ</a></li>
         <li class="nav-item"><a class="nav-link" href="#tours">Tour</a></li>
       </ul>
+      <button class="toggle-dark ms-3" id="darkToggle"><i class="fa-solid fa-moon"></i></button>
     </div>
   </div>
 </nav>
 
-<section id="home" class="hero">
+<section id="home" class="hero" data-aos="zoom-in" data-aos-duration="1200">
   <h1>Khám Phá Việt Nam Tuyệt Đẹp</h1>
   <p>Trải nghiệm hành trình đáng nhớ cùng KANYE WEST Travel</p>
   <a href="#tours" class="btn btn-gold" id="exploreBtn">Khám phá ngay</a>
 </section>
 
 <section id="tours" class="container py-5">
-  <h2 class="text-center text-primary mb-4 fw-bold">Tour Nổi Bật</h2>
-  <div class="search-box">
-    <input type="text" id="searchBox" class="form-control" placeholder="Tìm tour...">
+  <h2 class="text-center text-primary mb-4 fw-bold" data-aos="fade-up">Tour Nổi Bật</h2>
+  <div class="search-box mb-4 text-center">
+    <input type="text" id="searchBox" class="form-control d-inline-block w-50" placeholder="🔍 Tìm tour...">
   </div>
   <div class="row g-4" id="tour-list"></div>
 </section>
@@ -73,8 +94,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <img id="modalImg" src="" class="img-fluid mb-3" alt="">
+        <img id="modalImg" src="" class="img-fluid mb-3 rounded" alt="">
         <p id="modalDesc"></p>
+        <div class="alert alert-info"><i class="fa-solid fa-info-circle me-2"></i><span id="modalDetail"></span></div>
         <h5 class="text-success" id="modalPrice"></h5>
         <div class="mb-3">
           <label class="form-label fw-bold">Số lượng người</label>
@@ -84,21 +106,12 @@
         <h6 class="fw-bold mt-3">Dịch vụ bao gồm:</h6>
         <ul id="modalServices"></ul>
         <hr>
-        <h5 class="text-primary">Đặt tour ngay</h5>
         <form id="bookingForm">
-          <div class="mb-3">
-            <label class="form-label">Họ tên</label>
-            <input type="text" class="form-control" id="customerName" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Số điện thoại</label>
-            <input type="tel" class="form-control" id="customerPhone" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" id="customerEmail" required>
-          </div>
-          <button type="submit" class="btn btn-gold w-100"><i class="fa-solid fa-plane me-2"></i>Gửi yêu cầu đặt tour</button>
+          <h5 class="text-primary">Đặt tour ngay</h5>
+          <div class="mb-3"><label class="form-label">Họ tên</label><input type="text" class="form-control" id="customerName" required></div>
+          <div class="mb-3"><label class="form-label">Số điện thoại</label><input type="tel" class="form-control" id="customerPhone" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" id="customerEmail" required></div>
+          <button type="submit" class="btn btn-gold w-100"><i class="fa-solid fa-paper-plane me-2"></i>Gửi yêu cầu</button>
         </form>
       </div>
     </div>
@@ -109,98 +122,31 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 AOS.init();
-
-const tours = {
-  1:{name:"Hồ Ba Bể 2N1Đ",price:"2.900.000 ₫",desc:"Khám phá hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi rừng Bắc Kạn.",img:"hobabe.jpg",services:["Thuyền tham quan","Khách sạn 3 sao","Ăn 3 bữa/ngày","Vé tham quan"]},
-  2:{name:"Phong Nha - Kẻ Bàng 2N1Đ",price:"3.300.000 ₫",desc:"Tham quan hang động kỳ vĩ, sông Son và thiên nhiên hoang sơ Quảng Bình.",img:"phongnhakebang.jpg",services:["Khách sạn 3 sao","Thuyền Phong Nha","Hướng dẫn viên","Ăn sáng buffet"]},
-  3:{name:"Phố cổ Hội An 3N2Đ",price:"3.700.000 ₫",desc:"Dạo phố cổ, ngắm đèn lồng, thưởng thức ẩm thực và check-in cầu Nhật Bản.",img:"phocohoian.jpg",services:["Khách sạn phố cổ","Ăn sáng","Xe đưa đón","Vé tham quan"]},
-  4:{name:"Hà Giang 5N4Đ",price:"6.800.000 ₫",desc:"Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng và cảnh sắc hùng vĩ.",img:"hagiang.jpg",services:["Khách sạn 2-3 sao","Xe du lịch","Ăn 3 bữa/ngày","Vé tham quan"]},
-  5:{name:"Huế 2N1Đ",price:"2.800.000 ₫",desc:"Khám phá Đại Nội, chùa Thiên Mụ và du thuyền sông Hương.",img:"hue.jpg",services:["Khách sạn trung tâm","Ăn sáng","Hướng dẫn viên","Vé tham quan"]},
-  6:{name:"TP Hồ Chí Minh 2N1Đ",price:"2.600.000 ₫",desc:"Khám phá Sài Gòn hoa lệ, Dinh Độc Lập, chợ Bến Thành và phố đi bộ Nguyễn Huệ.",img:"tphochiminh.jpg",services:["Khách sạn 3 sao","Ăn sáng","Xe tham quan","Vé tham quan"]},
-  7:{name:"Vịnh Hạ Long 2N1Đ",price:"3.500.000 ₫",desc:"Du thuyền trên vịnh – kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi.",img:"vinhhalong.jpg",services:["Du thuyền 4 sao","Ăn trên tàu","Vé tham quan","Xe đưa đón"]},
-  8:{name:"Hà Nội 2N1Đ",price:"2.800.000 ₫",desc:"Thủ đô nghìn năm văn hiến, tham quan Lăng Bác, Hồ Gươm và phố cổ Hà Nội.",img:"hanoi.jpg",services:["Khách sạn trung tâm","Ăn sáng buffet","Xe đưa đón","Vé tham quan"]},
-  9:{name:"Đà Lạt 3N2Đ",price:"3.500.000 ₫",desc:"Thành phố ngàn hoa, không khí se lạnh và cảnh đẹp lãng mạn.",img:"dalat.jpg",services:["Khách sạn 3 sao","Ăn sáng","Xe đưa đón","Vé tham quan"]},
-  10:{name:"Phú Quốc 4N3Đ",price:"5.200.000 ₫",desc:"Thiên đường biển đảo – nghỉ dưỡng sang trọng, bãi cát trắng mịn.",img:"phuquoc.jpg",services:["Khách sạn 4 sao","Ăn 3 bữa/ngày","Vé cáp treo Hòn Thơm","Xe đón sân bay"]},
-  11:{name:"Nha Trang 3N2Đ",price:"4.100.000 ₫",desc:"Thành phố biển năng động, bãi biển trong xanh và ẩm thực phong phú.",img:"nhatrang.jpg",services:["Khách sạn ven biển","Bữa ăn hải sản","Xe đưa đón","Vé VinWonders"]},
-  12:{name:"Sapa 3N2Đ",price:"3.900.000 ₫",desc:"Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.",img:"sapa.jpg",services:["Khách sạn 3 sao","Ăn sáng + tối","Cáp treo Fansipan","Xe giường nằm"]}
+const tours={
+1:{name:"Hồ Ba Bể 2N1Đ",price:"2.900.000 ₫",desc:"Khám phá hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi rừng Bắc Kạn.",detail:"Hành trình gồm tham quan hồ Ba Bể, thác Đầu Đẳng, động Puông, chèo thuyền kayak và thưởng thức đặc sản miền núi.",img:"hobabe.jpg",services:["Thuyền tham quan","Khách sạn 3 sao","Ăn 3 bữa/ngày","Vé tham quan"]},
+2:{name:"Phong Nha - Kẻ Bàng 2N1Đ",price:"3.300.000 ₫",desc:"Tham quan hang động kỳ vĩ, sông Son và thiên nhiên hoang sơ Quảng Bình.",detail:"Khám phá hang Phong Nha, động Thiên Đường, du thuyền sông Son và trải nghiệm ẩm thực miền Trung.",img:"phongnhakebang.jpg",services:["Khách sạn 3 sao","Thuyền Phong Nha","Hướng dẫn viên","Ăn sáng buffet"]},
+3:{name:"Phố cổ Hội An 3N2Đ",price:"3.700.000 ₫",desc:"Dạo phố cổ, ngắm đèn lồng và thưởng thức ẩm thực.",detail:"Tham quan chùa Cầu, nhà cổ Tấn Ký, phố đèn lồng, làng gốm Thanh Hà, chợ đêm và trải nghiệm làm đèn lồng thủ công.",img:"phocohoian.jpg",services:["Khách sạn phố cổ","Ăn sáng","Xe đưa đón","Vé tham quan"]},
+4:{name:"Hà Giang 5N4Đ",price:"6.800.000 ₫",desc:"Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng và cảnh sắc hùng vĩ.",detail:"Khám phá đèo Mã Pí Lèng, cột cờ Lũng Cú, phố cổ Đồng Văn, nhà Pao và chợ vùng cao đặc sắc.",img:"hagiang.jpg",services:["Khách sạn 2-3 sao","Xe du lịch","Ăn 3 bữa/ngày","Vé tham quan"]},
+5:{name:"Huế 2N1Đ",price:"2.800.000 ₫",desc:"Khám phá Đại Nội, chùa Thiên Mụ và du thuyền sông Hương.",detail:"Tham quan Kinh Thành Huế, chùa Thiên Mụ, lăng Minh Mạng và dạo thuyền trên sông Hương về đêm.",img:"hue.jpg",services:["Khách sạn trung tâm","Ăn sáng","Hướng dẫn viên","Vé tham quan"]},
+6:{name:"TP Hồ Chí Minh 2N1Đ",price:"2.600.000 ₫",desc:"Khám phá Sài Gòn hoa lệ, Dinh Độc Lập, chợ Bến Thành và phố đi bộ Nguyễn Huệ.",detail:"Tham quan Nhà thờ Đức Bà, Bưu điện Thành phố, Dinh Thống Nhất, chợ Bến Thành, ẩm thực và phố đêm Nguyễn Huệ.",img:"tphochiminh.jpg",services:["Khách sạn 3 sao","Ăn sáng","Xe tham quan","Vé tham quan"]},
+7:{name:"Vịnh Hạ Long 2N1Đ",price:"3.500.000 ₫",desc:"Du thuyền trên vịnh – kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi.",detail:"Du ngoạn vịnh Hạ Long bằng du thuyền, thăm hang Sửng Sốt, đảo Titop và thưởng thức bữa tối trên boong tàu.",img:"vinhhalong.jpg",services:["Du thuyền 4 sao","Ăn trên tàu","Vé tham quan","Xe đưa đón"]},
+8:{name:"Hà Nội 2N1Đ",price:"2.800.000 ₫",desc:"Thủ đô nghìn năm văn hiến, tham quan Lăng Bác, Hồ Gươm và phố cổ Hà Nội.",detail:"Tham quan Lăng Bác, Văn Miếu, Hồ Gươm, phố cổ Hà Nội, trải nghiệm ẩm thực và cà phê trứng nổi tiếng.",img:"hanoi.jpg",services:["Khách sạn trung tâm","Ăn sáng buffet","Xe đưa đón","Vé tham quan"]},
+9:{name:"Đà Lạt 3N2Đ",price:"3.500.000 ₫",desc:"Thành phố ngàn hoa, không khí se lạnh và cảnh đẹp lãng mạn.",detail:"Khám phá Thung Lũng Tình Yêu, Langbiang, hồ Tuyền Lâm, quảng trường Lâm Viên và chợ đêm Đà Lạt.",img:"dalat.jpg",services:["Khách sạn 3 sao","Ăn sáng","Xe đưa đón","Vé tham quan"]},
+10:{name:"Phú Quốc 4N3Đ",price:"5.200.000 ₫",desc:"Thiên đường biển đảo – nghỉ dưỡng sang trọng, bãi cát trắng mịn.",detail:"Khám phá bãi Sao, cáp treo Hòn Thơm, VinWonders, Grand World và tắm biển ngắm hoàng hôn.",img:"phuquoc.jpg",services:["Khách sạn 4 sao","Ăn 3 bữa/ngày","Vé cáp treo Hòn Thơm","Xe đón sân bay"]},
+11:{name:"Nha Trang 3N2Đ",price:"4.100.000 ₫",desc:"Thành phố biển năng động, bãi biển trong xanh và ẩm thực phong phú.",detail:"Tắm biển, lặn ngắm san hô, tham quan VinWonders, Tháp Bà Ponagar, chợ đêm và ăn hải sản.",img:"nhatrang.jpg",services:["Khách sạn ven biển","Bữa ăn hải sản","Xe đưa đón","Vé VinWonders"]},
+12:{name:"Sapa 3N2Đ",price:"3.900.000 ₫",desc:"Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.",detail:"Chinh phục đỉnh Fansipan, bản Cát Cát, cầu Mây, tham quan nhà thờ đá Sapa và chợ phiên dân tộc.",img:"sapa.jpg",services:["Khách sạn 3 sao","Ăn sáng + tối","Cáp treo Fansipan","Xe giường nằm"]}
 };
-
-const tourList = document.getElementById('tour-list');
-let currentTour = null;
-
-function renderTours(filter=""){
-  tourList.innerHTML = "";
-  for(let id in tours){
-    const t = tours[id];
-    if(filter && !t.name.toLowerCase().includes(filter.toLowerCase())) continue;
-    tourList.innerHTML += `
-      <div class="col-md-4 col-sm-6" data-aos="fade-up" onclick="openDetail(${id})">
-        <div class="tour-card">
-          <img src="${t.img}" alt="${t.name}" class="img-fluid" loading="lazy">
-          <div class="card-body">
-            <h5>${t.name}</h5>
-            <p>${t.desc}</p>
-            <div class="price">${t.price}</div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
+const tourList=document.getElementById('tour-list');let currentTour=null;
+function renderTours(filter=""){tourList.innerHTML="";for(let id in tours){const t=tours[id];if(filter&&!t.name.toLowerCase().includes(filter.toLowerCase()))continue;
+tourList.innerHTML+=`<div class="col-md-4 col-sm-6" data-aos="fade-up" onclick="openDetail(${id})"><div class="tour-card"><img src="${t.img}" alt="${t.name}"><div class="p-3"><h5>${t.name}</h5><p>${t.desc}</p><div class="d-flex justify-content-between align-items-center"><span class="price">${t.price}</span><button class="btn btn-outline-primary btn-sm">Xem chi tiết</button></div></div></div></div>`;}}
 renderTours();
-
-document.getElementById('searchBox').addEventListener('input', e => renderTours(e.target.value));
-
-function openDetail(id){
-  const t = tours[id];
-  currentTour = t;
-  document.getElementById('modalTitle').innerText = t.name;
-  document.getElementById('modalImg').src = t.img;
-  document.getElementById('modalImg').alt = t.name;
-  document.getElementById('modalDesc').innerText = t.desc;
-  document.getElementById('modalPrice').innerText = "Giá mỗi người: " + t.price;
-  document.getElementById('modalServices').innerHTML = t.services.map(s => `<li>${s}</li>`).join('');
-  document.getElementById('peopleCount').value = 1;
-  updateTotalPrice();
-  new bootstrap.Modal(document.getElementById('tourModal')).show();
-}
-
-function updateTotalPrice(){
-  if(!currentTour) return;
-  let count = parseInt(document.getElementById('peopleCount').value);
-  if(isNaN(count) || count<1) count=1;
-  const basePrice = parseInt(currentTour.price.replace(/\D/g,''));
-  const total = basePrice*count;
-  document.getElementById('totalPrice').innerText = total.toLocaleString('vi-VN')+" ₫";
-}
-
-document.addEventListener('input', e => {
-  if(e.target.id === 'peopleCount') updateTotalPrice();
-});
-
-document.getElementById('bookingForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
-  const email = document.getElementById('customerEmail').value.trim();
-  const people = document.getElementById('peopleCount').value;
-  const total = document.getElementById('totalPrice').innerText;
-
-  Swal.fire({
-    icon: 'success',
-    title: 'Đặt tour thành công!',
-    html: `Cảm ơn <b>${name}</b>!<br>Số lượng: ${people} người<br>Tổng tiền: ${total}<br>Email: ${email}<br>SĐT: ${phone}`,
-    confirmButtonColor: '#0077b6'
-  });
-
-  this.reset();
-});
-
-document.getElementById('exploreBtn').addEventListener('click', e => {
-  e.preventDefault();
-  document.querySelector('#tours').scrollIntoView({behavior:'smooth'});
-});
+document.getElementById('searchBox').addEventListener('input',e=>renderTours(e.target.value));
+function openDetail(id){const t=tours[id];currentTour=t;document.getElementById('modalTitle').innerText=t.name;document.getElementById('modalImg').src=t.img;document.getElementById('modalDesc').innerText=t.desc;document.getElementById('modalDetail').innerText=t.detail;document.getElementById('modalPrice').innerText="Giá mỗi người: "+t.price;document.getElementById('modalServices').innerHTML=t.services.map(s=>`<li>${s}</li>`).join('');document.getElementById('peopleCount').value=1;updateTotalPrice();new bootstrap.Modal(document.getElementById('tourModal')).show();}
+function updateTotalPrice(){if(!currentTour)return;let count=parseInt(document.getElementById('peopleCount').value);if(isNaN(count)||count<1)count=1;const basePrice=parseInt(currentTour.price.replace(/\D/g,''));const total=basePrice*count;document.getElementById('totalPrice').innerText=total.toLocaleString('vi-VN')+" ₫";}
+document.addEventListener('input',e=>{if(e.target.id==='peopleCount')updateTotalPrice();});
+document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('customerName').value.trim();const phone=document.getElementById('customerPhone').value.trim();const email=document.getElementById('customerEmail').value.trim();const people=document.getElementById('peopleCount').value;const total=document.getElementById('totalPrice').innerText;Swal.fire({icon:'success',title:'Đặt tour thành công!',html:`<b>${name}</b> đã đặt tour <b>${currentTour.name}</b><br>Số lượng: ${people} người<br>Tổng: ${total}<br>Email: ${email}<br>SĐT: ${phone}`,confirmButtonColor:'#0077b6'});e.target.reset();});
+document.getElementById('darkToggle').addEventListener('click',()=>{document.body.classList.toggle('dark-mode');const icon=document.querySelector('#darkToggle i');icon.classList.toggle('fa-moon');icon.classList.toggle('fa-sun');});
+document.getElementById('exploreBtn').addEventListener('click',e=>{e.preventDefault();document.querySelector('#tours').scrollIntoView({behavior:'smooth'});});
 </script>
 </body>
 </html>
