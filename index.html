@@ -9,42 +9,112 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
+
 :root {
---primary:#0077b6;--secondary:#00b4d8;--accent:#ffe45e;
---bg-light:#f8f9fa;--bg-dark:#121212;--text-light:#ffffff;--text-dark:#212529;
---card-light:#ffffff;--card-dark:#1e1e1e;
+    --primary: #0077b6;
+    --secondary: #00b4d8;
+    --accent: #ffe45e;
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-section: #ffffff;
+    --bg-input: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
+
+
+body.dark-mode {
+    --bg-body: #0f172a; 
+    --bg-card: #1e293b; 
+    --bg-section: #1e293b;
+    --bg-input: #334155;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
 html {scroll-behavior: smooth;}
-body{font-family:'Poppins',sans-serif;background:var(--bg-light);color:var(--text-dark);transition:0.3s;overflow-x:hidden;}
-body.dark-mode{background:var(--bg-dark);color:var(--text-light);}
-.navbar{background:var(--primary);z-index:1050;padding:15px 0;}
-.navbar-brand{font-weight:700;color:white!important;font-size:1.5rem;}
-.nav-link{color:white!important;font-weight:500;margin-left:20px;transition:0.3s;}
-.nav-link:hover{color:var(--accent)!important;}
-.hero{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('vietnam.jpg') center/cover;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;}
-.btn-explore{background:var(--accent);color:#000;border-radius:50px;padding:15px 40px;font-weight:700;text-decoration:none;transition:0.3s;border:none;margin-top:25px;display:inline-block;}
-.btn-explore:hover{background:#ffcd00;transform:scale(1.05);color:#000;}
-.tour-card{background:var(--card-light);border-radius:20px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.05);transition:0.4s;cursor:pointer;border:none;height:100%;}
-.tour-card:hover{transform:translateY(-12px);box-shadow:0 15px 35px rgba(0,0,0,0.15);}
-.tour-card img{height:250px;width:100%;object-fit:cover;}
-.price-tag{color:var(--primary);font-weight:700;font-size:1.25rem;}
-body.dark-mode .tour-card{background:var(--card-dark);color:var(--text-light);}
-#main-view, #detail-view {transition: opacity 0.4s ease;}
-.hidden {display: none !important;}
-.detail-banner{width:100%;height:500px;object-fit:cover;border-radius:30px;margin-bottom:35px;box-shadow:0 15px 40px rgba(0,0,0,0.2);}
-.info-section{background:var(--card-light);padding:45px;border-radius:30px;box-shadow:0 5px 25px rgba(0,0,0,0.05);}
-body.dark-mode .info-section{background:var(--card-dark);}
-.booking-sidebar{position:sticky;top:110px;background:var(--primary);color:white;padding:35px;border-radius:30px;box-shadow:0 20px 40px rgba(0,119,182,0.25);}
-footer{background:#023e8a;color:white;padding:60px 0;margin-top:100px;text-align:center;}
-.social-icon{width:50px;height:50px;background:rgba(255,255,255,0.1);display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:white;text-decoration:none;margin:0 10px;transition:0.3s;font-size:1.5rem;}
-.social-icon:hover{background:var(--accent);color:#000;transform:translateY(-5px);}
-.btn-back{margin-bottom:25px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:var(--primary);font-size:1.1rem;}
-body.dark-mode .btn-back{color:var(--secondary);}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+
+.navbar { background: var(--primary); z-index: 1050; padding: 15px 0; border: none;}
+.navbar-brand { font-weight: 700; color: white !important; font-size: 1.5rem; }
+.nav-link { color: white !important; font-weight: 500; margin-left: 20px; transition: 0.3s; }
+.nav-link:hover { color: var(--accent) !important; }
+
+
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('vietnam.jpg') center/cover;
+    height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; color: white;
+}
+.btn-explore {
+    background: var(--accent); color: #000; border-radius: 50px; padding: 15px 40px;
+    font-weight: 700; text-decoration: none; transition: 0.3s; border: none; margin-top: 25px;
+}
+.btn-explore:hover { background: #ffcd00; transform: scale(1.05); color: #000; }
+
+
+.tour-card {
+    background: var(--bg-card); border-radius: 20px; overflow: hidden;
+    box-shadow: var(--shadow); transition: 0.4s; cursor: pointer; border: 1px solid var(--border-color); height: 100%;
+}
+.tour-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+.tour-card img { height: 250px; width: 100%; object-fit: cover; }
+.price-tag { color: var(--primary); font-weight: 700; font-size: 1.25rem; }
+body.dark-mode .price-tag { color: var(--secondary); }
+.text-muted-custom { color: var(--text-muted); font-size: 0.9rem; }
+
+
+.hidden { display: none !important; }
+.detail-banner { width: 100%; height: 500px; object-fit: cover; border-radius: 30px; margin-bottom: 35px; box-shadow: var(--shadow); }
+.info-section { background: var(--bg-section); padding: 45px; border-radius: 30px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
+
+
+.itinerary-content {
+    color: var(--text-main) !important;
+    background-color: var(--bg-body) !important;
+    border-radius: 15px; padding: 20px;
+}
+
+
+.booking-sidebar {
+    position: sticky; top: 110px; background: var(--primary); color: white;
+    padding: 35px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,119,182,0.25);
+}
+.booking-sidebar input {
+    background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;
+}
+.booking-sidebar input:focus {
+    background-color: rgba(255,255,255,0.2); color: white; outline: none; box-shadow: none;
+}
+.booking-sidebar label { color: rgba(255,255,255,0.8); }
+
+
+footer { background: #023e8a; color: white; padding: 60px 0; margin-top: 100px; text-align: center; }
+.social-icon {
+    width: 50px; height: 50px; background: rgba(255,255,255,0.1); display: inline-flex;
+    align-items: center; justify-content: center; border-radius: 50%; color: white;
+    text-decoration: none; margin: 0 10px; transition: 0.3s; font-size: 1.5rem;
+}
+.social-icon:hover { background: var(--accent); color: #000; transform: translateY(-5px); }
+
+.btn-back { margin-bottom: 25px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: var(--primary); }
+body.dark-mode .btn-back { color: var(--secondary); }
 </style>
 </head>
 <body id="top">
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 <div class="container">
 <a class="navbar-brand" href="javascript:void(0)" onclick="navTo('top')"><i class="fa-solid fa-paper-plane me-2"></i>KANYE WEST Travel</a>
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -72,7 +142,7 @@ body.dark-mode .btn-back{color:var(--secondary);}
 <section id="tour-section" class="container py-5">
 <div class="text-center mb-5" data-aos="fade-up">
 <h2 class="display-5 fw-bold text-primary">Hành Trình Của Những Ước Mơ</h2>
-<p class="text-muted">Lựa chọn điểm đến tiếp theo để viết nên những kỷ niệm khó quên</p>
+<p class="text-muted-custom">Lựa chọn điểm đến tiếp theo để viết nên những kỷ niệm khó quên</p>
 <div class="mx-auto" style="width:100px;height:5px;background:var(--accent);border-radius:10px;"></div>
 </div>
 <div class="row g-4" id="tour-grid"></div>
@@ -86,18 +156,18 @@ body.dark-mode .btn-back{color:var(--secondary);}
 <img id="detailImg" class="detail-banner" src="" alt="">
 <div class="info-section">
 <h1 id="detailTitle" class="display-5 fw-bold mb-4"></h1>
-<p id="detailDesc" class="fs-5 text-muted mb-5 italic" style="font-style: italic; border-left: 4px solid var(--accent); padding-left: 20px;"></p>
-<hr class="my-5">
+<p id="detailDesc" class="fs-5 mb-5 italic" style="font-style: italic; border-left: 4px solid var(--accent); padding-left: 20px; color: var(--text-muted);"></p>
+<hr class="my-5" style="border-color: var(--border-color);">
 <h4 class="fw-bold mb-4 text-primary"><i class="fa-solid fa-map me-3"></i>Lịch trình trải nghiệm</h4>
-<div id="detailContent" class="fs-6 lh-lg text-secondary p-4 bg-light rounded-4"></div>
-<hr class="my-5">
+<div id="detailContent" class="fs-6 lh-lg itinerary-content"></div>
+<hr class="my-5" style="border-color: var(--border-color);">
 <h4 class="fw-bold mb-4 text-primary"><i class="fa-solid fa-gift me-3"></i>Quà tặng dịch vụ</h4>
 <ul id="detailServices" class="list-unstyled"></ul>
 </div>
 </div>
 <div class="col-lg-4">
 <div class="booking-sidebar">
-<h3 class="fw-bold mb-4 border-bottom pb-3">Đăng kí ngay</h3>
+<h3 class="fw-bold mb-4 border-bottom pb-3">Giữ chỗ ngay</h3>
 <div class="mb-4">
 <small class="d-block opacity-75">Giá vé trọn gói từ</small>
 <span id="detailPrice" class="display-6 fw-bold text-warning"></span>
@@ -125,8 +195,8 @@ body.dark-mode .btn-back{color:var(--secondary);}
 <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
 </div>
 <hr class="bg-white my-4 opacity-25">
-<p class="small mb-0">Địa chỉ: 36 Đường Nem Chua, Thanh Hóa, Việt Nam</p>
-<p class="small mb-0">Hotline:  36183618 | Email: KANYEWEST@gmail.com</p>
+<p class="small mb-0">Địa chỉ: 123 Đường Du Lịch, Thanh Hóa, Việt Nam</p>
+<p class="small mb-0">Hotline: 1900 KANYE | Email: contact@kanyewest.vn</p>
 </div>
 </footer>
 
@@ -134,19 +204,21 @@ body.dark-mode .btn-back{color:var(--secondary);}
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 AOS.init({duration: 1000, once: true});
+
+
 const tours={
-1:{name:"Ba Bể: Bản Tình Ca Núi Rừng",price:"2.900.000 ₫",desc:"Lạc bước giữa tiên cảnh nhân gian, nơi mặt nước hồ phẳng lặng như gương soi bóng rặng núi đá vôi kỳ vĩ.",detail:"Rời xa khói bụi thành phố để đắm mình vào làn nước xanh lục bảo. Bạn sẽ được chèo thuyền xuyên qua Động Puông huyền bí, lắng nghe tiếng thác Đầu Đẳng gầm vang và thưởng thức chén rượu ngô cay nồng bên bếp lửa của người dân tộc Tày.",img:"hobabe.jpg",services:["Thuyền tham quan riêng","Nghỉ dưỡng homestay view hồ","Trọn gói 3 bữa đặc sản","Hướng dẫn viên bản địa"]},
-2:{name:"Phong Nha: Mê Cung Trong Lòng Đất",price:"3.300.000 ₫",desc:"Khám phá 'Hoàng cung trong lòng đất' với hệ thống thạch nhũ triệu năm tuổi lung linh như những dải lụa.",detail:"Hành trình chinh phục Động Thiên Đường - hang động khô dài nhất Châu Á. Cảm nhận hơi lạnh từ đá vôi và vẻ đẹp kỳ ảo của tạo hóa dưới những ánh đèn lung linh, sau đó thư giãn tại suối Moọc trong xanh như ngọc.",img:"phongnhakebang.jpg",services:["Vé vào cổng toàn bộ","Xe điện tham quan","Bữa trưa đậm chất Quảng Bình","Bảo hiểm du lịch cao cấp"]},
-3:{name:"Hội An: Miền Ký Ức Vàng Son",price:"3.700.000 ₫",desc:"Tìm về những góc phố rêu phong, nơi thời gian như ngừng lại bên những ánh đèn lồng rực rỡ sắc màu.",detail:"Dạo bước trên những con đường vàng rực hoa giấy, thả đèn hoa đăng trên dòng sông Hoài thơ mộng và học cách làm đèn lồng truyền thống. Một hành trình dành cho những tâm hồn lãng mạn và yêu những giá trị xưa cũ.",img:"phocohoian.jpg",services:["Khách sạn 4 sao phố cổ","Tour ẩm thực đường phố","Xe đưa đón sân bay","Vé tham quan các điểm di tích"]},
-4:{name:"Hà Giang: Bản Hùng Ca Đá Núi",price:"6.800.000 ₫",desc:"Chinh phục những khúc cua 'tử thần' và chạm tay vào mây trời trên đỉnh đèo Mã Pí Lèng huyền thoại.",detail:"Đứng giữa cao nguyên đá Đồng Văn hùng vĩ, bạn sẽ thấy mình nhỏ bé trước thiên nhiên. Trải nghiệm đi thuyền trên sông Nho Quế xanh ngắt và chiêm ngưỡng hẻm vực Tu Sản sâu nhất Đông Nam Á - một trải nghiệm buộc phải có trong đời.",img:"hagiang.jpg",services:["Xe Limousine đời mới","Khách sạn tiêu chuẩn 3 sao","Thuyền sông Nho Quế","Chụp ảnh chuyên nghiệp suốt tuyến"]},
-5:{name:"Huế: Nét Chầm Chậm Của Thời Gian",price:"2.800.000 ₫",desc:"Trải nghiệm cảm giác làm 'vua chúa' một ngày giữa không gian cung đình nghiêm trang và thanh tịnh.",detail:"Tham quan Đại Nội cổ kính, nghe ca Huế trên sông Hương và thưởng thức trà cung đình. Huế không chỉ là lịch sử, mà còn là tâm hồn, là sự bình yên lắng đọng trong từng hơi thở của vùng đất Cố đô.",img:"hue.jpg",services:["Nghỉ dưỡng khách sạn cổ điển","Bữa tối cung đình Huế","Thuyền rồng sông Hương","Vé tham quan lăng tẩm Vua"]},
-6:{name:"Sài Gòn: Hòn Ngọc Viễn Đông",price:"2.600.000 ₫",desc:"Hòa mình vào nhịp sống hối hả, rực rỡ và tràn đầy năng lượng của thành phố không bao giờ ngủ.",detail:"Từ nét cổ kính của Nhà Thờ Đức Bà đến vẻ hiện đại của tòa nhà Landmark 81. Bạn sẽ thấy một Sài Gòn đa sắc thái: sang trọng ở những khu trung tâm và bình dị, hào sảng trong những con hẻm nhỏ thơm nồng mùi cà phê vợt.",img:"tphochiminh.jpg",services:["Khách sạn trung tâm quận 1","Xe bus 2 tầng tham quan","Vé đài quan sát Bitexco","Tour khám phá địa đạo Củ Chi"]},
-7:{name:"Hạ Long: Kỳ Quan Giữa Biển Khơi",price:"3.500.000 ₫",desc:"Thức dậy giữa vịnh biển kỳ quan, nơi hàng ngàn hòn đảo đá vôi nhô lên từ làn nước xanh như ngọc.",detail:"Trải nghiệm ngủ đêm trên du thuyền 5 sao, đón bình minh với bài tập Tai Chi và tham gia lớp học nấu ăn trên boong tàu. Chèo Kayak len lỏi qua những hang động nghìn năm tuổi để thấy sự kỳ diệu của thiên nhiên.",img:"vinhhalong.jpg",services:["Du thuyền 5 sao sang trọng","Tiệc tối hải sản thượng hạng","Hoạt động Kayak miễn phí","Xe đón tiễn Hà Nội - Hạ Long"]},
-8:{name:"Hà Nội: Thu Quyến Rũ Mười Hai Mùa Hoa",price:"2.800.000 ₫",desc:"Cảm nhận nét thanh lịch, nhẹ nhàng của thủ đô qua mùi hương hoa sữa và tiếng chuông chùa vang vọng.",detail:"Dạo quanh Hồ Gươm sớm mai, thưởng thức bát phở nóng hổi và nhâm nhi tách cà phê trứng đặc sản. Hà Nội luôn biết cách vỗ về trái tim lữ khách bằng những điều bình dị nhưng vô cùng sâu sắc.",img:"hanoi.jpg",services:["Khách sạn trung tâm Phố Cổ","Xe điện city tour","Vé xem múa rối nước","Tour khám phá 36 phố phường"]},
-9:{name:"Đà Lạt: Thành Phố Ngàn Lời Yêu",price:"3.500.000 ₫",desc:"Đi tìm sự lãng mạn dưới những tán thông xanh và làn sương mờ ảo buổi sớm mai.",detail:"Đà Lạt là nơi để yêu và được yêu. Check-in những quán cà phê view thung lũng mộng mơ, dạo bước ven hồ Xuân Hương và tận hưởng hơi lạnh đặc trưng của vùng cao nguyên Lâm Viên xanh mướt.",img:"dalat.jpg",services:["Resort view thung lũng","Xe đưa đón tham quan riêng","Vé vào cổng các khu du lịch","Ăn sáng buffet cao cấp"]},
-10:{name:"Phú Quốc: Thiên Đường Nắng Vàng",price:"5.200.000 ₫",desc:"Thả mình trên những bãi cát trắng mịn như kem và ngắm hoàng hôn đỏ rực tan vào lòng biển cả.",detail:"Khám phá thế giới đại dương bao la với tour cano 4 đảo, đi cáp treo vượt biển dài nhất thế giới và vui chơi bất tận tại VinWonders. Phú Quốc chính là định nghĩa hoàn hảo nhất cho một kỳ nghỉ dưỡng thiên đường.",img:"phuquoc.jpg",services:["Resort 5 sao có bãi biển riêng","Vé cáp treo Hòn Thơm","Cano tham quan 4 đảo","Xe đón tiễn sân bay"]},
-11:{name:"Nha Trang: Biển Xanh Vẫy Gọi",price:"4.100.000 ₫",desc:"Hòa mình vào làn nước trong vắt và trải nghiệm những trò chơi cảm giác mạnh trên biển đầy phấn khích.",detail:"Tận hưởng cảm giác thư giãn tuyệt đối với tắm bùn khoáng nóng, vui chơi tại Vinpearl Land và thưởng thức tiệc hải sản tươi ngon ngay tại bè. Nha Trang luôn tràn đầy nắng nắng và gió vịnh mặn mòi.",img:"nhatrang.jpg",services:["Khách sạn ven biển đường Trần Phú","Vé trọn gói VinWonders","Tour đảo bằng Cano","Tiệc hải sản nướng"]},
-12:{name:"Sapa: Nơi Gặp Gỡ Đất Trời",price:"3.900.000 ₫",desc:"Chạm tay vào nóc nhà Đông Dương và chiêm ngưỡng những ruộng bậc thang vàng óng như nấc thang lên thiên đường.",detail:"Chinh phục đỉnh Fansipan bằng cáp treo hiện đại, trekking qua những bản làng mù sương và khám phá nét văn hóa độc đáo của người dân tộc thiểu số vùng cao. Sapa mang vẻ đẹp sừng sững nhưng cũng rất đỗi dịu dàng.",img:"sapa.jpg",services:["Khách sạn view núi Fansipan","Vé cáp treo khứ hồi","Xe giường nằm Cabin VIP","Ăn uống trọn gói đặc sản Tây Bắc"]}
+1:{name:"Ba Bể: Bản Tình Ca Núi Rừng",price:"2.900.000 ₫",desc:"Hồ Ba Bể Bắc Kạn là một hồ nước ngọt tự nhiên đẹp như tranh vẽ, được bao quanh bởi các ngọn núi xanh thẳm và rừng rậm tươi tốt. Với vẻ đẹp hoang sơ và hùng vĩ của núi rừng, hồ nước trong xanh, cùng với những điểm tham quan hấp dẫn, Hồ Ba Bể chắc chắn sẽ mang đến cho bạn những trải nghiệm đáng nhớ.",detail:"Rời xa khói bụi thành phố để đắm mình vào làn nước xanh lục bảo. Bạn sẽ được chèo thuyền xuyên qua Động Puông huyền bí, lắng nghe tiếng thác Đầu Đẳng gầm vang và thưởng thức chén rượu ngô cay nồng bên bếp lửa của người dân tộc Tày.",img:"hobabe.jpg",services:["Thuyền tham quan riêng","Nghỉ dưỡng homestay view hồ","Trọn gói 3 bữa đặc sản","Hướng dẫn viên bản địa"]},
+2:{name:"Phong Nha: Mê Cung Trong Lòng Đất",price:"3.300.000 ₫",desc:"Phong Nha là điểm du lịch nổi tiếng thuộc tỉnh Quảng Bình, được biết đến với hệ thống hang động kỳ vĩ. Nơi đây có Vườn quốc gia Phong Nha – Kẻ Bàng, di sản thiên nhiên thế giới. Phong Nha sở hữu nhiều hang động đẹp như động Phong Nha, động Thiên Đường. Thiên nhiên hoang sơ và không khí trong lành thu hút đông đảo du khách. Đây là điểm đến lý tưởng cho những ai yêu thích khám phá.",detail:"Hành trình chinh phục Động Thiên Đường - hang động khô dài nhất Châu Á. Cảm nhận hơi lạnh từ đá vôi và vẻ đẹp kỳ ảo của tạo hóa dưới những ánh đèn lung linh, sau đó thư giãn tại suối Moọc trong xanh như ngọc.",img:"phongnhakebang.jpg",services:["Vé vào cổng toàn bộ","Xe điện tham quan","Bữa trưa đậm chất Quảng Bình","Bảo hiểm du lịch cao cấp"]},
+3:{name:"Hội An: Miền Ký Ức Vàng Son",price:"3.700.000 ₫",desc:"Hội An là thành phố cổ thuộc tỉnh Quảng Nam, nổi tiếng với vẻ đẹp cổ kính. Nơi đây có những ngôi nhà mái ngói rêu phong và những con phố đèn lồng lung linh. Hội An còn được UNESCO công nhận là Di sản văn hóa thế giới. Ẩm thực Hội An rất đa dạng và hấp dẫn. Thành phố mang đến cảm giác yên bình, hoài niệm.Tìm về những góc phố rêu phong, nơi thời gian như ngừng lại bên những ánh đèn lồng rực rỡ sắc màu.",detail:"Dạo bước trên những con đường vàng rực hoa giấy, thả đèn hoa đăng trên dòng sông Hoài thơ mộng và học cách làm đèn lồng truyền thống. Một hành trình dành cho những tâm hồn lãng mạn và yêu những giá trị xưa cũ.",img:"phocohoian.jpg",services:["Khách sạn 4 sao phố cổ","Tour ẩm thực đường phố","Xe đưa đón sân bay","Vé tham quan các điểm di tích"]},
+4:{name:"Hà Giang: Bản Hùng Ca Đá Núi",price:"6.800.000 ₫",desc:"Hà Giang là tỉnh vùng núi phía Bắc Việt Nam, nổi bật với cảnh sắc hùng vĩ. Nơi đây có cao nguyên đá Đồng Văn nổi tiếng thế giới. Hà Giang thu hút du khách bởi những con đèo quanh co và ruộng bậc thang đẹp mắt. Văn hóa các dân tộc thiểu số rất đa dạng và đặc sắc. Đây là điểm đến yêu thích của dân phượt.Chinh phục những khúc cua 'tử thần' và chạm tay vào mây trời trên đỉnh đèo Mã Pí Lèng huyền thoại.",detail:"Đứng giữa cao nguyên đá Đồng Văn hùng vĩ, bạn sẽ thấy mình nhỏ bé trước thiên nhiên. Trải nghiệm đi thuyền trên sông Nho Quế xanh ngắt và chiêm ngưỡng hẻm vực Tu Sản sâu nhất Đông Nam Á - một trải nghiệm buộc phải có trong đời.",img:"hagiang.jpg",services:["Xe Limousine đời mới","Khách sạn tiêu chuẩn 3 sao","Thuyền sông Nho Quế","Chụp ảnh chuyên nghiệp suốt tuyến"]},
+5:{name:"Huế: Nét Chầm Chậm Của Thời Gian",price:"2.800.000 ₫",desc:"Huế là thành phố thuộc miền Trung, từng là kinh đô của triều Nguyễn. Nơi đây nổi tiếng với quần thể di tích cố đô Huế. Huế mang vẻ đẹp trầm lắng, cổ kính và thơ mộng. Ẩm thực Huế phong phú, tinh tế và mang đậm nét cung đình. Huế là điểm đến giàu giá trị lịch sử và văn hóa.Trải nghiệm cảm giác làm 'vua chúa' một ngày giữa không gian cung đình nghiêm trang và thanh tịnh.",detail:"Tham quan Đại Nội cổ kính, nghe ca Huế trên sông Hương và thưởng thức trà cung đình. Huế không chỉ là lịch sử, mà còn là tâm hồn, là sự bình yên lắng đọng trong từng hơi thở của vùng đất Cố đô.",img:"hue.jpg",services:["Nghỉ dưỡng khách sạn cổ điển","Bữa tối cung đình Huế","Thuyền rồng sông Hương","Vé tham quan lăng tẩm Vua"]},
+6:{name:"Sài Gòn: Hòn Ngọc Viễn Đông",price:"2.600.000 ₫",desc:"Sài Gòn, hay TP. Hồ Chí Minh, là trung tâm kinh tế lớn nhất cả nước. Thành phố luôn sôi động và nhộn nhịp. Nơi đây có nhiều công trình hiện đại xen lẫn kiến trúc cổ. Ẩm thực Sài Gòn đa dạng, phong phú từ khắp mọi miền. Sài Gòn mang nét trẻ trung và năng động.Hòa mình vào nhịp sống hối hả, rực rỡ và tràn đầy năng lượng của thành phố không bao giờ ngủ.",detail:"Từ nét cổ kính của Nhà Thờ Đức Bà đến vẻ hiện đại của tòa nhà Landmark 81. Bạn sẽ thấy một Sài Gòn đa sắc thái: sang trọng ở những khu trung tâm và bình dị, hào sảng trong những con hẻm nhỏ thơm nồng mùi cà phê vợt.",img:"tphochiminh.jpg",services:["Khách sạn trung tâm quận 1","Xe bus 2 tầng tham quan","Vé đài quan sát Bitexco","Tour khám phá địa đạo Củ Chi"]},
+7:{name:"Hạ Long: Kỳ Quan Giữa Biển Khơi",price:"3.500.000 ₫",desc:"Hạ Long là thành phố du lịch thuộc tỉnh Quảng Ninh. Nơi đây nổi tiếng với vịnh Hạ Long – di sản thiên nhiên thế giới. Vịnh có hàng nghìn đảo đá vôi lớn nhỏ với cảnh quan tuyệt đẹp. Du khách có thể tham gia các hoạt động tham quan, nghỉ dưỡng trên biển. Hạ Long là điểm đến hấp dẫn trong và ngoài nước.Thức dậy giữa vịnh biển kỳ quan, nơi hàng ngàn hòn đảo đá vôi nhô lên từ làn nước xanh như ngọc.",detail:"Trải nghiệm ngủ đêm trên du thuyền 5 sao, đón bình minh với bài tập Tai Chi và tham gia lớp học nấu ăn trên boong tàu. Chèo Kayak len lỏi qua những hang động nghìn năm tuổi để thấy sự kỳ diệu của thiên nhiên.",img:"vinhhalong.jpg",services:["Du thuyền 5 sao sang trọng","Tiệc tối hải sản thượng hạng","Hoạt động Kayak miễn phí","Xe đón tiễn Hà Nội - Hạ Long"]},
+8:{name:"Hà Nội: Thu Quyến Rũ Mười Hai Mùa Hoa",price:"2.800.000 ₫",desc:"Hà Nội là thủ đô của Việt Nam với lịch sử lâu đời. Thành phố mang vẻ đẹp cổ kính xen lẫn hiện đại. Hà Nội nổi tiếng với phố cổ, hồ Hoàn Kiếm và các di tích lịch sử. Ẩm thực Hà Nội tinh tế và mang đậm nét truyền thống. Nơi đây thể hiện rõ nét văn hóa Việt Nam.Cảm nhận nét thanh lịch, nhẹ nhàng của thủ đô qua mùi hương hoa sữa và tiếng chuông chùa vang vọng.",detail:"Dạo quanh Hồ Gươm sớm mai, thưởng thức bát phở nóng hổi và nhâm nhi tách cà phê trứng đặc sản. Hà Nội luôn biết cách vỗ về trái tim lữ khách bằng những điều bình dị nhưng vô cùng sâu sắc.",img:"hanoi.jpg",services:["Khách sạn trung tâm Phố Cổ","Xe điện city tour","Vé xem múa rối nước","Tour khám phá 36 phố phường"]},
+9:{name:"Đà Lạt: Thành Phố Ngàn Lời Yêu",price:"3.500.000 ₫",desc:"Đà Lạt là thành phố du lịch nổi tiếng thuộc tỉnh Lâm Đồng. Nơi đây có khí hậu mát mẻ quanh năm. Đà Lạt nổi bật với rừng thông, hồ nước và hoa cỏ. Thành phố mang vẻ đẹp lãng mạn và yên bình. Đây là điểm đến lý tưởng cho nghỉ dưỡng.Đi tìm sự lãng mạn dưới những tán thông xanh và làn sương mờ ảo buổi sớm mai.",detail:"Đà Lạt là nơi để yêu và được yêu. Check-in những quán cà phê view thung lũng mộng mơ, dạo bước ven hồ Xuân Hương và tận hưởng hơi lạnh đặc trưng của vùng cao nguyên Lâm Viên xanh mướt.",img:"dalat.jpg",services:["Resort view thung lũng","Xe đưa đón tham quan riêng","Vé vào cổng các khu du lịch","Ăn sáng buffet cao cấp"]},
+10:{name:"Phú Quốc: Thiên Đường Nắng Vàng",price:"5.200.000 ₫",desc:"Phú Quốc là hòn đảo lớn nhất Việt Nam, thuộc tỉnh Kiên Giang. Nơi đây nổi tiếng với biển xanh, cát trắng và nắng vàng. Phú Quốc có nhiều khu nghỉ dưỡng cao cấp. Hải sản ở đây rất tươi ngon và phong phú. Đây là điểm du lịch biển hấp dẫn.Thả mình trên những bãi cát trắng mịn như kem và ngắm hoàng hôn đỏ rực tan vào lòng biển cả.",detail:"Khám phá thế giới đại dương bao la với tour cano 4 đảo, đi cáp treo vượt biển dài nhất thế giới và vui chơi bất tận tại VinWonders. Phú Quốc chính là định nghĩa hoàn hảo nhất cho một kỳ nghỉ dưỡng thiên đường.",img:"phuquoc.jpg",services:["Resort 5 sao có bãi biển riêng","Vé cáp treo Hòn Thơm","Cano tham quan 4 đảo","Xe đón tiễn sân bay"]},
+11:{name:"Nha Trang: Biển Xanh Vẫy Gọi",price:"4.100.000 ₫",desc:"Nha Trang là thành phố biển thuộc tỉnh Khánh Hòa. Nơi đây nổi tiếng với bãi biển đẹp và khí hậu dễ chịu. Nha Trang có nhiều hoạt động vui chơi, giải trí trên biển. Thành phố còn có các điểm tham quan như tháp Bà Ponagar. Đây là điểm đến du lịch nổi tiếng.Hòa mình vào làn nước trong vắt và trải nghiệm những trò chơi cảm giác mạnh trên biển đầy phấn khích.",detail:"Tận hưởng cảm giác thư giãn tuyệt đối với tắm bùn khoáng nóng, vui chơi tại Vinpearl Land và thưởng thức tiệc hải sản tươi ngon ngay tại bè. Nha Trang luôn tràn đầy nắng nắng và gió vịnh mặn mòi.",img:"nhatrang.jpg",services:["Khách sạn ven biển đường Trần Phú","Vé trọn gói VinWonders","Tour đảo bằng Cano","Tiệc hải sản nướng"]},
+12:{name:"Sapa: Nơi Gặp Gỡ Đất Trời",price:"3.900.000 ₫",desc:"Sa Pa là thị trấn du lịch thuộc tỉnh Lào Cai. Nơi đây có khí hậu mát mẻ và cảnh núi non hùng vĩ. Sa Pa nổi tiếng với ruộng bậc thang và đỉnh Fansipan. Văn hóa các dân tộc thiểu số rất đặc sắc. Đây là điểm đến hấp dẫn cho du lịch nghỉ dưỡng và khám phá.Chạm tay vào nóc nhà Đông Dương và chiêm ngưỡng những ruộng bậc thang vàng óng như nấc thang lên thiên đường.",detail:"Chinh phục đỉnh Fansipan bằng cáp treo hiện đại, trekking qua những bản làng mù sương và khám phá nét văn hóa độc đáo của người dân tộc thiểu số vùng cao. Sapa mang vẻ đẹp sừng sững nhưng cũng rất đỗi dịu dàng.",img:"sapa.jpg",services:["Khách sạn view núi Fansipan","Vé cáp treo khứ hồi","Xe giường nằm Cabin VIP","Ăn uống trọn gói đặc sản Tây Bắc"]}
 };
 
 const grid=document.getElementById('tour-grid');
@@ -161,8 +233,8 @@ grid.innerHTML+=`
 <div class="tour-card" onclick="openTour(${id})">
 <img src="${t.img}" alt="${t.name}">
 <div class="p-4">
-<h5 class="fw-bold mb-2">${t.name}</h5>
-<p class="text-muted small mb-3 text-truncate">${t.desc}</p>
+<h5 class="fw-bold mb-2" style="color: var(--text-main)">${t.name}</h5>
+<p class="text-muted-custom mb-3 text-truncate">${t.desc}</p>
 <div class="d-flex justify-content-between align-items-center">
 <span class="price-tag">${t.price}</span>
 <span class="btn btn-sm btn-primary rounded-pill px-3 shadow-sm">Xem ngay</span>
@@ -184,7 +256,7 @@ document.getElementById('detailTitle').innerText=t.name;
 document.getElementById('detailDesc').innerText=t.desc;
 document.getElementById('detailPrice').innerText=t.price;
 document.getElementById('detailContent').innerText=t.detail;
-document.getElementById('detailServices').innerHTML=t.services.map(s=>`<li><i class="fa-solid fa-check text-success me-2"></i>${s}</li>`).join('');
+document.getElementById('detailServices').innerHTML=t.services.map(s=>`<li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i><span style="color: var(--text-main)">${s}</span></li>`).join('');
 document.getElementById('userCount').value=1;
 updateTotal();
 }
@@ -198,8 +270,6 @@ function navTo(id){
 backToHome();
 const target=document.getElementById(id);
 if(target) window.scrollTo({top: target.offsetTop - 80, behavior: 'smooth'});
-const menu = bootstrap.Collapse.getInstance(document.getElementById('navMenu'));
-if(menu) menu.hide();
 }
 
 function updateTotal(){
@@ -211,9 +281,13 @@ document.getElementById('totalDisplay').innerText=(price*count).toLocaleString('
 
 document.getElementById('userCount').addEventListener('input',updateTotal);
 document.getElementById('darkToggle').addEventListener('click',()=>{
-document.body.classList.toggle('dark-mode');
-const icon=document.querySelector('#darkToggle i');
-icon.classList.toggle('fa-moon');icon.classList.toggle('fa-sun');
+    document.body.classList.toggle('dark-mode');
+    const icon=document.querySelector('#darkToggle i');
+    if(document.body.classList.contains('dark-mode')){
+        icon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+    }
 });
 
 document.getElementById('bookForm').addEventListener('submit',e=>{
