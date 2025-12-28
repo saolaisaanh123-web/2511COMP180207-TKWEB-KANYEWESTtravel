@@ -6,6 +6,8 @@
   <title>KANYE WEST Travel</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {font-family: 'Poppins', sans-serif; background: #f6f8fa; color: #333;}
     .navbar {background: #0077b6;}
@@ -23,13 +25,12 @@
     .tour-card h5 {font-weight: 700; color: #0077b6;}
     .price {color: #0077b6; font-weight: 700; font-size: 1.1rem;}
     footer {background: #023e8a; color: #fff; text-align: center; padding: 25px; margin-top: 60px;}
-    .modal-content {border-radius: 15px; overflow: hidden;}
-    .modal-header {background: #0077b6; color: #fff; border-bottom: none;}
-    .modal-body img {border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
+    .search-box {max-width: 400px; margin: 20px auto;}
     .form-label {font-weight: 600;}
   </style>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
   <div class="container">
     <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-plane-departure me-2"></i>KANYE WEST Travel</a>
@@ -44,19 +45,26 @@
     </div>
   </div>
 </nav>
+
 <section id="home" class="hero">
   <h1>Khám Phá Việt Nam Tuyệt Đẹp</h1>
   <p>Trải nghiệm hành trình đáng nhớ cùng KANYE WEST Travel</p>
-  <a href="#tours" class="btn btn-gold">Khám phá ngay</a>
+  <a href="#tours" class="btn btn-gold" id="exploreBtn">Khám phá ngay</a>
 </section>
+
 <section id="tours" class="container py-5">
-  <h2 class="text-center text-primary mb-5 fw-bold">Tour Nổi Bật</h2>
+  <h2 class="text-center text-primary mb-4 fw-bold">Tour Nổi Bật</h2>
+  <div class="search-box">
+    <input type="text" id="searchBox" class="form-control" placeholder="Tìm tour...">
+  </div>
   <div class="row g-4" id="tour-list"></div>
 </section>
+
 <footer>
   <p class="mb-1">© 2036 KANYE WEST Travel. All rights reserved.</p>
   <small><i class="fa-solid fa-location-dot me-1"></i> Thanh Hóa, Việt Nam</small>
 </footer>
+
 <div class="modal fade" id="tourModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -65,7 +73,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <img id="modalImg" src="" class="img-fluid" alt="">
+        <img id="modalImg" src="" class="img-fluid mb-3" alt="">
         <p id="modalDesc"></p>
         <h5 class="text-success" id="modalPrice"></h5>
         <div class="mb-3">
@@ -96,8 +104,12 @@
     </div>
   </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+AOS.init();
+
 const tours = {
   1:{name:"Hồ Ba Bể 2N1Đ",price:"2.900.000 ₫",desc:"Khám phá hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi rừng Bắc Kạn.",img:"hobabe.jpg",services:["Thuyền tham quan","Khách sạn 3 sao","Ăn 3 bữa/ngày","Vé tham quan"]},
   2:{name:"Phong Nha - Kẻ Bàng 2N1Đ",price:"3.300.000 ₫",desc:"Tham quan hang động kỳ vĩ, sông Son và thiên nhiên hoang sơ Quảng Bình.",img:"phongnhakebang.jpg",services:["Khách sạn 3 sao","Thuyền Phong Nha","Hướng dẫn viên","Ăn sáng buffet"]},
@@ -112,23 +124,34 @@ const tours = {
   11:{name:"Nha Trang 3N2Đ",price:"4.100.000 ₫",desc:"Thành phố biển năng động, bãi biển trong xanh và ẩm thực phong phú.",img:"nhatrang.jpg",services:["Khách sạn ven biển","Bữa ăn hải sản","Xe đưa đón","Vé VinWonders"]},
   12:{name:"Sapa 3N2Đ",price:"3.900.000 ₫",desc:"Ngắm ruộng bậc thang, chinh phục Fansipan và văn hóa vùng cao.",img:"sapa.jpg",services:["Khách sạn 3 sao","Ăn sáng + tối","Cáp treo Fansipan","Xe giường nằm"]}
 };
+
 const tourList = document.getElementById('tour-list');
-for (let id in tours) {
-  const t = tours[id];
-  tourList.innerHTML += `
-    <div class="col-md-4 col-sm-6" onclick="openDetail(${id})">
-      <div class="tour-card">
-        <img src="${t.img}" alt="${t.name}" class="img-fluid" loading="lazy">
-        <div class="card-body">
-          <h5>${t.name}</h5>
-          <p>${t.desc}</p>
-          <div class="price">${t.price}</div>
+let currentTour = null;
+
+function renderTours(filter=""){
+  tourList.innerHTML = "";
+  for(let id in tours){
+    const t = tours[id];
+    if(filter && !t.name.toLowerCase().includes(filter.toLowerCase())) continue;
+    tourList.innerHTML += `
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" onclick="openDetail(${id})">
+        <div class="tour-card">
+          <img src="${t.img}" alt="${t.name}" class="img-fluid" loading="lazy">
+          <div class="card-body">
+            <h5>${t.name}</h5>
+            <p>${t.desc}</p>
+            <div class="price">${t.price}</div>
+          </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
+  }
 }
-let currentTour = null;
+
+renderTours();
+
+document.getElementById('searchBox').addEventListener('input', e => renderTours(e.target.value));
+
 function openDetail(id){
   const t = tours[id];
   currentTour = t;
@@ -142,25 +165,41 @@ function openDetail(id){
   updateTotalPrice();
   new bootstrap.Modal(document.getElementById('tourModal')).show();
 }
-function updateTotalPrice() {
-  if (!currentTour) return;
-  const count = parseInt(document.getElementById('peopleCount').value);
-  const basePrice = parseInt(currentTour.price.replace(/\D/g, ''));
-  const total = basePrice * count;
-  document.getElementById('totalPrice').innerText = total.toLocaleString('vi-VN') + " ₫";
+
+function updateTotalPrice(){
+  if(!currentTour) return;
+  let count = parseInt(document.getElementById('peopleCount').value);
+  if(isNaN(count) || count<1) count=1;
+  const basePrice = parseInt(currentTour.price.replace(/\D/g,''));
+  const total = basePrice*count;
+  document.getElementById('totalPrice').innerText = total.toLocaleString('vi-VN')+" ₫";
 }
-document.addEventListener('input', function(e){
+
+document.addEventListener('input', e => {
   if(e.target.id === 'peopleCount') updateTotalPrice();
 });
+
 document.getElementById('bookingForm').addEventListener('submit', function(e){
   e.preventDefault();
-  const name = document.getElementById('customerName').value;
-  const phone = document.getElementById('customerPhone').value;
-  const email = document.getElementById('customerEmail').value;
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const email = document.getElementById('customerEmail').value.trim();
   const people = document.getElementById('peopleCount').value;
   const total = document.getElementById('totalPrice').innerText;
-  alert(`Cảm ơn ${name}! Chúng tôi đã nhận thông tin đặt tour.\nSố lượng: ${people} người\nTổng tiền: ${total}\nSố điện thoại: ${phone}\nEmail: ${email}`);
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Đặt tour thành công!',
+    html: `Cảm ơn <b>${name}</b>!<br>Số lượng: ${people} người<br>Tổng tiền: ${total}<br>Email: ${email}<br>SĐT: ${phone}`,
+    confirmButtonColor: '#0077b6'
+  });
+
   this.reset();
+});
+
+document.getElementById('exploreBtn').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector('#tours').scrollIntoView({behavior:'smooth'});
 });
 </script>
 </body>
